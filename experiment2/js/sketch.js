@@ -1,3 +1,151 @@
+/* exported setup, draw */
+let seed = 0;
+
+const grassColor = "#8fba82";
+const waterColor = "#32639d";
+const lilyPadNum = 30;
+let lilyPads = [];
+const stoneNum = 23;
+let stones = [];
+
+
+
+function setup() {
+
+  canvasContainer = $("#canvas-container");
+  let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
+  canvas.parent("canvas-container");
+  $(window).resize(function() {
+    resizeScreen();
+  });
+  resizeScreen();
+
+	createButton("reimagine").mousePressed(() => reset());
+  
+  randomSeed(seed);
+	background(grassColor);
+  
+  fill(50, 99, 157);
+  ellipse(width / 2, height, 500, 250);
+
+  for(let i = 0; i < lilyPadNum; i++)
+  {
+    lilyPads[i] = new LilyPad();
+  }
+  
+  for(let i = 0; i < stoneNum; i++)
+  {
+    stones[i] = new Stone();
+  }
+  background(grassColor);
+  drawWater();
+}
+
+function draw() {
+  
+  
+  if(millis() % 15 == 0)
+  {
+    background(grassColor);
+    drawWater();
+  }
+  
+  for(let i = 0; i < lilyPadNum; i++)
+  {
+    lilyPads[i].draw();
+  }
+  for(let i = 0; i < stoneNum; i++)
+  {
+    stones[i].draw();
+  }
+}
+
+class LilyPad {
+  constructor() {
+    this.reconstruct();
+  }
+  
+  reconstruct() {
+    this.x = random((width / 6), 5 * (width / 6));
+    this.y = random(height / 2) + 4 * height / 7;
+    this.diameter = random(10, 30);
+    this.yOffset = random(1, 3);
+    this.timeOffset = random(300, 600);
+  }
+  
+  draw() {
+    stroke(179, 194, 137);
+    fill(179, 194, 137);
+    ellipse(this.x, this.y + sin(millis() / this.timeOffset) * this.yOffset, this.diameter, this.diameter);
+  }
+}
+
+class Stone {
+  constructor() {
+    this.reconstruct();
+  }
+  
+  reconstruct() {
+    this.x = random(width);
+    this.y = random(height / 3);
+    this.diameter = random(30, 50);
+  }
+  
+  draw() {
+    stroke(216, 182, 154);
+    fill(216, 182, 154);
+    ellipse(this.x, this.y, this.diameter, this.diameter);
+  }
+}
+
+function drawWater() 
+{
+  stroke(waterColor);
+  fill(waterColor);
+  beginShape();
+  vertex(0, height);
+  const steps = 10;
+  for (let i = 0; i < steps + 1; i++) {
+    let x = (width * i) / steps;
+    let y =
+      ((height / 2 - (random() * random() * random() * height) / 4 - height / 50) * (sin(width / i)) / 8) + height / 2;
+    //let y = sin(width / i) * height;
+    vertex(x, y);
+  }
+  vertex(width, height);
+  endShape(CLOSE);
+}
+function reset()
+{
+  seed++;
+  
+  background(grassColor);
+  drawWater();
+  
+  for(let i = 0; i < lilyPadNum; i++)
+  {
+    lilyPads[i].reconstruct();
+  }
+  
+  for(let i = 0; i < stoneNum; i++)
+  {
+    stones[i].reconstruct();
+  }
+}
+
+
+function resizeScreen() {
+  centerHorz = canvasContainer.width() / 2; // Adjusted for drawing logic
+  centerVert = canvasContainer.height() / 2; // Adjusted for drawing logic
+  console.log("Resizing...");
+  resizeCanvas(canvasContainer.width(), canvasContainer.height());
+  // redrawCanvas(); // Redraw everything based on new size
+}
+
+
+
+/**
+
 // sketch.js - purpose and description here
 // Author: Your Name
 // Date:
@@ -26,13 +174,7 @@ class MyClass {
     }
 }
 
-function resizeScreen() {
-  centerHorz = canvasContainer.width() / 2; // Adjusted for drawing logic
-  centerVert = canvasContainer.height() / 2; // Adjusted for drawing logic
-  console.log("Resizing...");
-  resizeCanvas(canvasContainer.width(), canvasContainer.height());
-  // redrawCanvas(); // Redraw everything based on new size
-}
+
 
 // setup() function is called once when the program starts
 function setup() {
@@ -77,3 +219,5 @@ function draw() {
 function mousePressed() {
     // code to run when mouse is pressed
 }
+
+**/
