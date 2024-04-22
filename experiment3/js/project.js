@@ -98,28 +98,28 @@ function gridCode(grid, i, j, target) {
 
 function drawContext(grid, i, j, target, ti, tj) {
   code = gridCode(grid, i, j, target);
-  print("______");
-  print("Code: " + code);
-  print("Lookup: " + lookup[code]);
+  //print("______");
+  //print("Code: " + code);
+  //print("Lookup: " + lookup[code]);
   const [tiOffset, tjOffset] = lookup[code];
   placeTile(i, j, ti + tiOffset, tj + tjOffset);
 }
 
 const lookup = [
-  [1,1],
-  [2,1],
-  [3,1],
-  [4,1],
-  [5,1],
-  [6,1],
-  [7,1],
-  [8,1],
-  [9,1],
-  [10,1],
-  [11,1],
-  [12,1],
-  [13,1],
-  [14,1],
-  [15,1],
-  [16,1]
+  [1,1], // 0 None
+  [0, 1], // 1 Right Face
+  [2, 1], // 2 Left Face
+  [1,1], // 3
+  [1,2], // 4 Top Face
+  [0,2], // 5 Bottom Left Corner
+  [2,2], // 6 Bottom Right Corner
+  [16,2], // 7 
+  [1,0], // 8 Bottom Face
+  [0,0], // 9 Top Left Corner
+  [2,0], // 10 Top Right Corner
+  [1,1], // 11 
+  [13,1], // 12
+  [16, 1], // 13 
+  [16, 1], // 14
+  [16,1] // 15 None
 ];

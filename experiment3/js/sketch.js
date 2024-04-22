@@ -6,18 +6,19 @@ function generateGrid(numCols, numRows) {
   for (let i = 0; i < numRows; i++) {
     let row = [];
     for (let j = 0; j < numCols; j++) {
-      if(j % 2 == 0)
-      {
-        row.push("_");
-      }
-      else
-      {
-        row.push(".");
-      }
+      row.push(".");
     }
     grid.push(row);
+
   }
   
+  for(let i = 2; i < numRows - 3; i++)
+  {
+    for (let j = 2; j < numCols - 3; j++) 
+    {
+      grid[i][j] = "_";
+    }
+  }
   return grid;
 }
 
@@ -27,19 +28,21 @@ function drawGrid(grid) {
   
   for(let i = 0; i < grid.length; i++) {
     for(let j = 0; j < grid[i].length; j++) {
-      if (grid[i][j] == '_') {
-        //placeTile(i, j, (floor(random(4))), 0);
+      if (gridCheck(grid, i, j, "_")) {
+        placeTile(i, j, random(4) | 0, 3);
+      }
+      else {
+        drawContext(grid, i, j, "_", 4, 3);
       }
       if (gridCheck(grid, i, j, ".")) {
-        placeTile(i, j, floor(random(4)), 0);
+        //placeTile(i, j, random(4) | 0, 0);
       } else {
-        drawContext(grid, i, j, ".", 4, 0);
+           //drawContext(grid, i, j, ".", 4, 0);
       }
 
+    //drawContext(grid, 1, 0, "_", 4, 0);
     }
   }
-  
-  gridCode(grid, 0, grid[0].length - 1, grid[0][0]);
   
 }
 
