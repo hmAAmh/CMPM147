@@ -79,12 +79,28 @@
 
 			<div class="minor-section">
 				<h2>Description</h2>
-				<p>What are you trying to acomplish with this experiment?</p>
+				<p>WMy main goal with this project was to convey a difference in mood between the dungeon version of the map and the overworld version, while still keeping clear commonalities between them. I achieved this through both the consistency of their general shape and layout, as well as reusing the same dirt texture between them.
+
+					The core layout was created using a series of rectangles placed throughout the grid, each with varying sizes. For each rectangle, a random chance was given to connect it via a path to one other rectangle. These rectangles are allowed to overlap with eachother.
+					
+					Afterwards, a radius was given around this layout for a secondary later. Beyond that, the remaining spaces were filled in with the third layer.
+					
+					In the dungeon layout, the main floor tiles were filled in through random chance. The dirt on a floor had a chance of rocks to appear in any random location. Additionally, doors had a chance to be placed in the top tial, to appear as though they're adjacent to the walls. Chests were randomly placed near walls of all the other cardinal directions.
+					
+					In the overworld layout, the dirt had a random chance to have rocks placed on them, similar to the dungeon variant. Additionally, two different types of trees have a random chance of spawning on the grassy planes.</p>
 			</div>
 
 			<div class="minor-section">
 				<h2>Technical</h2>
-				<p>Describe in detail what you did technically and how it works?</p>
+				<p>Dungeon: 
+					Floor = . 
+					Walls = _ 
+					Abyss = 0
+
+					Overworld: 
+					Water = . 
+					Dirt = _ 
+					Grass = 0</p>
 			</div>
 
 			<div class="minor-section">
