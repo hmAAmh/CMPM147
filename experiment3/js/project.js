@@ -5,6 +5,10 @@
 let seed = 0;
 let tilesetImage;
 let currentGrid = [];
+let dustParticles = [];
+let waterParticles = [];
+let dustParticlesNum = 50;
+let isDungeon = true;
 let numRows, numCols;
 
 function preload() {
@@ -17,8 +21,14 @@ function reseed() {
   seed = (seed | 0) + 1109;
   randomSeed(seed);
   noiseSeed(seed);
+  waterParticles = [];
   select("#seedReport").html("seed " + seed);
   regenerateGrid();
+}
+
+function swapTerrain()
+{
+  isDungeon = !isDungeon;
 }
 
 function regenerateGrid() {
@@ -60,6 +70,7 @@ function setup() {
   select("canvas").elt.getContext("2d").imageSmoothingEnabled = false;
 
   select("#reseedButton").mousePressed(reseed);
+  select("#swapTerrain").mousePressed(swapTerrain);
   select("#asciiBox").input(reparseGrid);
 
   reseed();
@@ -69,6 +80,16 @@ function setup() {
 function draw() {
   randomSeed(seed);
   drawGrid(currentGrid);
+
+  if(isDungeon)
+  {
+    drawDust();
+  }
+  else
+  {
+    drawWater();
+  }
+
 }
 
 function placeTile(i, j, ti, tj) {
@@ -106,20 +127,21 @@ function drawContext(grid, i, j, target, ti, tj) {
 }
 
 const lookup = [
-  [1,1], // 0 None
+  [30,1], // 0 None
   [0, 1], // 1 Right Face
   [2, 1], // 2 Left Face
-  [1,1], // 3
+  [30,1], // 3
   [1,2], // 4 Top Face
   [0,2], // 5 Bottom Left Corner
   [2,2], // 6 Bottom Right Corner
-  [16,2], // 7 
+  [30,2], // 7 
   [1,0], // 8 Bottom Face
   [0,0], // 9 Top Left Corner
   [2,0], // 10 Top Right Corner
-  [1,1], // 11 
-  [13,1], // 12
-  [16, 1], // 13 
-  [16, 1], // 14
-  [16,1] // 15 None
+  [30,1], // 11 
+  [30,1], // 12
+  [30, 1], // 13 
+  [30, 1], // 14
+  [30,1] // 15 None
 ];
+
