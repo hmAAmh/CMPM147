@@ -35,7 +35,7 @@ function initDesign(inspiration) {
   switch(inspiration.name)
   { //----------- BRAVE LITTLE ABACUS 1 //-----------
   case "Masked Dancers: Concern in So Many Things You Forget Where You Are":
-    numToRender = 600;
+    numToRender = 1200;
       
     maxSize = (width / 1.5) * (100 / numToRender);
   
@@ -57,7 +57,7 @@ function initDesign(inspiration) {
     }
     break;
   case "Moonworld Playground": //----------- CAT //-----------
-    numToRender = 500;
+    numToRender = 1000;
       
     maxSize = (width / 2) * (100 / numToRender);
   
@@ -79,7 +79,7 @@ function initDesign(inspiration) {
     }
     break;
   case "the first glass beach album": //----------- GLASS BEACH //-----------
-    numToRender = 800;
+    numToRender = 1600;
       
     maxSize = (width / 1.5) * (100 / numToRender);
   
